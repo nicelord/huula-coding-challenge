@@ -3,6 +3,7 @@ import service.AnalyzerOutput;
 import service.CSVScanService;
 import service.TransactionAnalyzerService;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -12,11 +13,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        if (args.length < 3) {
+        if (args.length < 4) {
             System.err.println("Invalid parameter");
             System.err.println("Usage : java -jar <jarfile.jar> \"<input-file>\" \"<merchant-name>\" \"<from-date>\" \"<to-date>\"");
             System.err.println("Note !! -- accepted date format is \"dd/MM/yyyy HH:mm:ss\"");
             System.err.println(String.format("Example : java -jar main.jar \"%s\" \"%s\" \"%s\" \"%s\"", "transactions.csv", "Kwik-E-Mart", "20/08/2018 12:00:00", "20/08/2018 13:00:00"));
+            return;
+        }
+
+        File f = new File(args[0]);
+        if(!f.exists()){
+            System.err.println("File " + args[0] + " not found!");
             return;
         }
 
